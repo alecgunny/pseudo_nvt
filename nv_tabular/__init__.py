@@ -7,4 +7,5 @@ if py_ver >= 3.7:
 else:
    from .utils import _namedtuple as namedtuple
 
-from . import workflow, ops, stats, writer
+from . import ops, stats, writer
+from .dataset import Dataset as dataset

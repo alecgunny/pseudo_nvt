@@ -1,11 +1,11 @@
 import re
-import sys
 from collections import namedtuple
 
 
-ALL = 'all'
-CONTINUOUS = 'CONTINUOUS'
-CATEGORICAL = 'CATEGORICAL'
+class VariableTypes:
+    ALL = 'ALL'
+    CONTINUOUS = 'CONTINUOUS'
+    CATEGORICAL = 'CATEGORICAL'
 
 
 def snake_case_class_name(obj):
