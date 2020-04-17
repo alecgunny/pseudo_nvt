@@ -178,7 +178,14 @@ class Op(namedtuple(
 
         if hasattr(self, 'ops'):
             # this is a workflow, so just add all the workflow's ops
-            new_ops = self.ops
+            # TODO: this should check continuous and categorical separately
+            if len(self.columns) == 0:
+                new_ops = [
+                    op._replace(columns=workflow.get_columns(op.default_in))
+                         for op in self.ops
+                ]
+            else:
+                new_ops = self.ops
         elif self.columns is None:
             # this has no columns, so set columns of the appropriate
             # variable type from the workflow as the columns for a new op
@@ -186,6 +193,7 @@ class Op(namedtuple(
             new_ops = [self._replace(columns=columns)]
         else:
             # this is an op and it has columns, so use it as is
+            # TODO: check for callable
             new_ops = [self]
 
         # TODO: similar checking of _id that will add a replaced version of
